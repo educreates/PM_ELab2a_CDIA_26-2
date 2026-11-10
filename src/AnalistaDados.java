@@ -15,24 +15,25 @@ public class AnalistaDados extends Colaborador {
         return horasPipeline * SALARIO * FRACAO_HORA;
     }
 
-    /**
-     * Acrescenta horas de pipeline, respeitando o máximo mensal.
-     * @return a quantidade efetiva de horas após a operação
-     */
     public double addHoraPipeline(double quantidade) {
-        // TODO: se quantidade <= 0, não altera e devolve horasPipeline atual
-        // TODO: soma quantidade, sem ultrapassar MAX_HORAS; devolve o novo total
-        return 0.0;
+        if (quantidade <= 0) {
+            System.out.println("valor inválido");
+        }
+
+        else if (quantidade + horasPipeline < MAX_HORAS) {
+            horasPipeline += quantidade;
+        }
+
+        return horasPipeline;
     }
 
-    /**
-     * Pagamento = salário base + valor das horas de pipeline.
-     * Após o pagamento, as horas devem ser zeradas e o total guardado em ultimoPagamento.
-     */
     @Override
     public double registrarPagamento() {
-        // TODO: calcular total, armazenar, zerar horasPipeline e devolver
-        return 0.0;
+        double pagamento = SALARIO + valorHorasPipeline();
+        horasPipeline = 0;
+        ultimoPagamento = pagamento;
+
+        return pagamento;
     }
 
     @Override
